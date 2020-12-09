@@ -21,9 +21,9 @@ namespace TutorialProject.Models.JsonFileProductServices
         private string JsonFileName
         {
 
-            get { return Path.Combine(WebHostEnvironment.WebRootPath, "data", "product"); }
+            get { return Path.Combine(WebHostEnvironment.WebRootPath, "data", "products.json"); }
         }
-        public Array GetProducts()
+        public IEnumerable<Product> GetProducts()
         {
             using (StreamReader jsonFileReader = File.OpenText(JsonFileName))
             {

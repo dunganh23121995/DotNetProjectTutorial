@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,10 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using TutorialProject.Models.Entitys;
+using TutorialProject.Models.JsonFileProductServices;
 
 namespace TutorialProject
 {
@@ -24,6 +28,8 @@ namespace TutorialProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllers(); // Khai báo thêm dịch vụ gọi controller
+            services.AddTransient<JsonFileProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,10 +52,17 @@ namespace TutorialProject
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseMvc();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();/// Map với controller
+                //endpoints.MapGet("/products", (context) => 
+                //{
+                //    var products = app.ApplicationServices.GetService<JsonFileProductService>().GetProducts();
+                //    var json = JsonSerializer.Serialize<IEnumerable<Product>>(products);
+                //    return context.Response.WriteAsync(json);
+                //});
             });
         }
     }

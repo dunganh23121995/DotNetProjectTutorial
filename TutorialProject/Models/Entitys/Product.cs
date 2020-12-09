@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -9,16 +10,22 @@ namespace TutorialProject.Models.Entitys
     public class Product
     {
         [JsonPropertyName("id")]
-        string Id;
+        public string Id { get; set; }
         [JsonPropertyName("maker")]
-        String Maker;
+        public String Maker { get; set; }
         [JsonPropertyName("img")]
-        string Img;
+        public string Img { get; set; }
         [JsonPropertyName("url")]
-        string Url;
+        public string Url { get; set; }
         [JsonPropertyName("title")]
-        string Title;
+        public string Title { get; set; }
         [JsonPropertyName("description")]
-        string Description;
+        public string Description { get; set; }
+
+
+        public override string ToString()
+        {
+            return JsonSerializer.Serialize<Product>(this);
+        }
     }
 }

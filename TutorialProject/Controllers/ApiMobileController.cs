@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace TutorialProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class ApiMobileController : ControllerBase
     {
-        [Route("get")]
+        [Route("anhmuongi")]
+        [HttpGet]
         public string get() {
             return "123";
         }

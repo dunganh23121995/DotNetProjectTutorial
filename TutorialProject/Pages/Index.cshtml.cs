@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TutorialProject.Models.Entitys;
+using TutorialProject.Models.JsonFileProductServices;
 
 namespace TutorialProject.Pages
 {
@@ -12,14 +14,18 @@ namespace TutorialProject.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IEnumerable<Product> Products { get; private set; }
+        private JsonFileProductService  ProductService;
+        public IndexModel(ILogger<IndexModel> logger, JsonFileProductService jsonFileProductService)
         {
             _logger = logger;
+            ProductService = jsonFileProductService;
+
         }
 
         public void OnGet()
         {
-
+            Products = ProductService.GetProducts();
         }
     }
 }
