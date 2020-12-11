@@ -50,9 +50,7 @@ namespace TutorialProject
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
-            app.UseMvc();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

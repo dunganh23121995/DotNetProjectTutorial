@@ -35,7 +35,36 @@ namespace TutorialProject.Models.JsonFileProductServices
                     );
             }
         }
+        public void addRate(string idProduct, int rate)
+        {
+            IEnumerable<Product> products = GetProducts();
+            //Product product = products.Where(x =>
+            // {
+            //     return x.Id == idProduct;
+            // }).First();
+            Product product = products.First<Product>(x=> x.Id == idProduct);
 
+            if (product.Ratings == null)
+            {
+                product.Ratings = new int[] { rate };
+            }
+            else
+            {
+                List<int> list = product.Ratings.ToList();
+                list.Add(rate);
+                product.Ratings = list.ToArray();
+            }
+            using (var ouputStream = File.OpenWrite(JsonFileName))
+            {
+                JsonSerializer.Serialize<IEnumerable<Product>>(
+                    new Utf8JsonWriter(ouputStream, new JsonWriterOptions
+                    {
+                        SkipValidation = true,
+                        Indented = true
+                    }),
+                    products);
+            }
+        }
 
     }
 }

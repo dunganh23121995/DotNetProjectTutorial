@@ -21,6 +21,8 @@ namespace TutorialProject.Models.Entitys
         public string Title { get; set; }
         [JsonPropertyName("description")]
         public string Description { get; set; }
+        [JsonPropertyName("rates")]
+        public int[] Ratings { get; set; }
 
 
         public override string ToString()
